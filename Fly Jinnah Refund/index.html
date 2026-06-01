@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fly Jinnah Refund Request</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div>
+      <h2 style="color: #dc2626; margin: 0;">✈️ Fly Jinnah Refund Tool</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Automated email generator for flight cancellations</p>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">☀️ Light Mode</button>
+  </div>
+
+  <div class="form-grid">
+    <div class="section-title full-width">📋 Cancellation Details</div>
+    
+    <div>
+      <label>Passenger Name:</label>
+      <input type="text" id="paxName" placeholder="e.g., ZamZam">
+    </div>
+    
+    <div>
+      <label>Airline PNR:</label>
+      <input type="text" id="pnr" placeholder="e.g., 46S79C" style="text-transform: uppercase;">
+    </div>
+
+    <div>
+      <label>Route:</label>
+      <input type="text" id="route" placeholder="e.g., UET - KHI" style="text-transform: uppercase;">
+    </div>
+    
+    <div>
+      <label>Flight Date (Click for Calendar):</label>
+      <input type="date" id="flightDate">
+    </div>
+    
+    <div>
+      <label>Flight Time (Click for Clock):</label>
+      <input type="time" id="flightTime">
+    </div>
+
+    <div class="full-width" style="margin-top: 10px;">
+      <label>Your Name (Agent):</label>
+      <input type="text" id="agentName" placeholder="Enter your name">
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="btn-primary" onclick="generateEmail()">✨ Generate & Copy Email</button>
+    <button class="btn-success" onclick="openEmail()">📧 Open in Gmail</button>
+    <button class="btn-secondary" onclick="location.reload()">🔄 Reset</button>
+  </div>
+
+  <div class="output-section">
+    <div class="output-box full-width">
+      <h3>Email Subject</h3>
+      <input type="text" id="subject" readonly placeholder="Generated subject will appear here...">
+    </div>
+
+    <div class="output-box full-width">
+      <h3>Email Body (Preview)</h3>
+      <div id="body" class="rich-text-box">Generated email body will appear here...</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Developed by <b>Qasim Ali</b> &bull; <a href="mailto:qasim.ali.official1920@gmail.com">qasim.ali.official1920@gmail.com</a></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

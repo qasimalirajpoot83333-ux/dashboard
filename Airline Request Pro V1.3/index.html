@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Request Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <div class="logo">
+            <img src="https://cdn.bookmepk.com/static/custom/V3/images/New-Logo---Bookme.png" alt="Bookme Logo" style="max-width: 180px;" onerror="this.style.display='none'"> 
+        </div>
+        <h1>Airline Request Pro</h1>
+        <p style="color: var(--text-muted); margin-top: 5px;">Automated Name & Title Corrections</p>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="panel form-panel">
+            <h2>📝 Request Details</h2>
+            
+            <div class="input-group">
+                <label>Request Type</label>
+                <select id="requestType">
+                    <option value="name">Name Correction</option>
+                    <option value="title">Title Correction</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Airline</label>
+                <select id="airline" onchange="toggleCustomAirline()">
+                    <option>Pakistan International Airlines (PIA)</option>
+                    <option>Airblue</option>
+                    <option>Fly Jinnah</option>
+                    <option>AirSial</option>
+                    <option>Qatar Airways</option>
+                    <option>Emirates</option>
+                    <option>Turkish Airlines</option>
+                    <option>Etihad Airways</option>
+                    <option>Saudi Airlines</option>
+                    <option value="custom">Custom Airline</option>
+                </select>
+                <input type="text" id="customAirline" placeholder="Enter Custom Airline Name" style="display:none; margin-top: 10px;">
+            </div>
+
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>PNR</label>
+                    <input type="text" id="pnr" placeholder="e.g. QQQ1" style="text-transform: uppercase;">
+                </div>
+                <div class="input-group">
+                    <label>Flight Date</label>
+                    <input type="date" id="date" title="Flight Date">
+                </div>
+                <div class="input-group">
+                    <label>Incorrect Details ❌</label>
+                    <input type="text" id="wrong" placeholder="Wrong Name / Title">
+                </div>
+                <div class="input-group">
+                    <label>Correct Details ✅</label>
+                    <input type="text" id="correct" placeholder="Correct Name / Title">
+                </div>
+                <div class="input-group">
+                    <label>Flight Number</label>
+                    <input type="text" id="flight" placeholder="e.g. PF-123" style="text-transform: uppercase;">
+                </div>
+                <div class="input-group">
+                    <label>Serial No. of Guest</label>
+                    <input type="text" id="serial" placeholder="e.g. 1">
+                </div>
+                <div class="input-group">
+                    <label>Airline Email</label>
+                    <input type="email" id="email" placeholder="Auto-filled email">
+                </div>
+                <div class="input-group">
+                    <label>Your Name</label>
+                    <input type="text" id="yourName" placeholder="Agent Name">
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="primary-btn" onclick="generateEmail()">✨ Generate Email</button>
+                <button class="secondary-btn" onclick="clearAll()">🗑️ Clear Form</button>
+            </div>
+
+            <p id="success-msg" style="display: none; color: #22c55e; font-size: 14px; font-weight: bold; text-align: center; margin-top: 15px;">
+                ✅ Email body auto-copied! Click 'Open in Gmail' and press Ctrl+V to paste.
+            </p>
+            <p id="error-msg" class="error-msg" style="display: none;">Please fill out all required fields!</p>
+        </div>
+
+        <div class="panel output-panel">
+            <h2>📧 Email Preview</h2>
+            
+            <div class="output-group">
+                <label>Subject</label>
+                <div class="copy-wrapper">
+                    <textarea id="subject" readonly></textarea>
+                    <button class="copy-btn" onclick="copyText('subject', this)">Copy</button>
+                </div>
+            </div>
+
+            <div class="output-group">
+                <label>Email Body</label>
+                <div class="copy-wrapper">
+                    <div id="body" contenteditable="true" class="email-preview">Generated email will appear here...</div>
+                    <button class="copy-btn" onclick="copyText('body', this)">Copy</button>
+                </div>
+            </div>
+
+            <button class="send-btn" onclick="sendEmail()">🚀 Open in Gmail</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>Developed by <b>Qasim Ali</b> &bull; <a href="mailto:QASIM.ALI.BOOKME@GMAIL.COM">QASIM.ALI.BOOKME@GMAIL.COM</a></p>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

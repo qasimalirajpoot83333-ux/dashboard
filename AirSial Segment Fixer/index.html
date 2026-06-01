@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AirSial Segment Correction</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div>
+      <h2 style="color: #1a73e8; margin: 0;">✈️ AirSial Segment Fixer</h2>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 5px;">Automated email generator for API segment issues</p>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+  </div>
+
+  <div class="form-grid">
+    <div class="full-width">
+      <label>Airline PNR:</label>
+      <input type="text" id="pnr" placeholder="Enter PNR (e.g., QQQ1)" style="text-transform: uppercase;">
+    </div>
+
+    <div class="section-title full-width">✅ Correct Segment Details</div>
+    <div>
+      <label>Correct Route:</label>
+      <input type="text" id="correctRoute" placeholder="e.g., Quetta to Karachi">
+    </div>
+    <div>
+      <label>Correct Flight Number:</label>
+      <input type="text" id="correctFlight" placeholder="e.g., PF-123" style="text-transform: uppercase;">
+    </div>
+
+    <div class="section-title full-width" style="color: #d32f2f;">❌ Incorrect Segment to Remove</div>
+    <div>
+      <label>Incorrect Route:</label>
+      <input type="text" id="wrongRoute" placeholder="e.g., Karachi to Islamabad">
+    </div>
+    <div>
+      <label>Incorrect Flight Number:</label>
+      <input type="text" id="wrongFlight" placeholder="e.g., PF-456" style="text-transform: uppercase;">
+    </div>
+
+    <div class="full-width" style="margin-top: 10px;">
+      <label>Your Name (Agent):</label>
+      <input type="text" id="agentName" placeholder="Enter your name">
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="btn-primary" onclick="generateEmail()">✨ Generate & Copy Email</button>
+    <button class="btn-success" onclick="openEmail()">📧 Open in Gmail</button>
+    <button class="btn-secondary" onclick="location.reload()">🔄 Reset</button>
+  </div>
+
+  <div class="output-section">
+    <div class="output-box full-width">
+      <h3>Email Subject</h3>
+      <input type="text" id="subject" readonly placeholder="Generated subject will appear here...">
+    </div>
+
+    <div class="output-box full-width">
+      <h3>Email Body (Preview)</h3>
+      <div id="body" class="rich-text-box">Generated email body will appear here...</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

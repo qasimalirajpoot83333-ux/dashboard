@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Email Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  
+  <div class="header">
+    <div class="logo-container">
+      <img src="https://cdn.bookmepk.com/static/custom/V3/images/New-Logo---Bookme.png" alt="Bookme Logo" class="header-logo" onerror="this.style.display='none'">
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()">☀️ Light Mode</button>
+  </div>
+
+  <div class="ticket-divider"></div>
+
+  <div class="form-grid">
+    <div class="full-width">
+      <label>Select Airline:</label>
+      <select id="airline" onchange="updateFields()">
+        <option value="">--Select Airline--</option>
+        <optgroup label="Pakistani Airlines">
+          <option value="pia">Pakistan International Airlines (PIA)</option>
+          <option value="airblue">Airblue</option>
+          <option value="serene">SereneAir</option>
+          <option value="airsial">AirSial</option>
+          <option value="flyjinnah">Fly Jinnah</option>
+        </optgroup>
+        <optgroup label="Middle East & Gulf">
+          <option value="emirates">Emirates</option>
+          <option value="qatar">Qatar Airways</option>
+          <option value="etihad">Etihad Airways</option>
+          <option value="saudia">Saudia</option>
+          <option value="flydubai">flydubai</option>
+          <option value="airarabia">Air Arabia</option>
+          <option value="flyadeal">flyadeal</option>
+          <option value="salamair">Salam Air</option>
+          <option value="flynas">flynas</option>
+          <option value="JazeeraAirways">Jazeera Airways</option>
+          <option value="gulf">Gulf Air</option>
+          <option value="oman">Oman Air</option>
+          <option value="rj">Royal Jordanian</option>
+        </optgroup>
+        <optgroup label="Asia Pacific">
+          <option value="srilankan">SriLankan Airlines</option>
+          <option value="china">China Southern Airlines</option>
+          <option value="thai">Thai Airways</option>
+          <option value="singapore">Singapore Airlines</option>
+          <option value="malaysia">Malaysia Airlines</option>
+          <option value="cathay">Cathay Pacific</option>
+          <option value="airindia">Air India</option>
+          <option value="indigo">IndiGo</option>
+        </optgroup>
+        <optgroup label="Europe & UK">
+          <option value="turkish">Turkish Airlines</option>
+          <option value="ba">British Airways</option>
+          <option value="virgin">Virgin Atlantic</option>
+          <option value="lufthansa">Lufthansa</option>
+          <option value="airfrance">Air France</option>
+          <option value="klm">KLM Royal Dutch Airlines</option>
+        </optgroup>
+        <optgroup label="North America">
+          <option value="american">American Airlines</option>
+          <option value="delta">Delta Air Lines</option>
+          <option value="united">United Airlines</option>
+          <option value="aircanada">Air Canada</option>
+        </optgroup>
+        <optgroup label="Other">
+          <option value="kamair">Kam Air</option>
+          <option value="custom">Custom Airline...</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div id="fields" class="dynamic-fields full-width"></div>
+
+    <div>
+      <label>Customer Email:</label>
+      <div class="input-wrapper">
+        <input type="email" id="customerEmail" placeholder="Enter customer email">
+        <button class="btn-paste" onclick="pasteFromClipboard('customerEmail')" title="Paste from clipboard">📋 Paste</button>
+      </div>
+    </div>
+
+    <div>
+      <label>Your Name:</label>
+      <div class="input-wrapper">
+        <input type="text" id="name" placeholder="Enter your name">
+        <button class="btn-paste" onclick="pasteFromClipboard('name')" title="Paste from clipboard">📋 Paste</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="options-group full-width">
+    <label class="checkbox-label">
+      <input type="checkbox" id="chkOkToBoard" checked>
+      Include "O.K. to Board" warning
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="chkTwoWay" checked>
+      Include "Two-way ticket" warning
+    </label>
+  </div>
+
+  <div class="button-group">
+    <button class="btn-primary" onclick="generateEmail()">✨ Generate Email</button>
+    <button class="btn-success" onclick="openEmail()">📧 Open in Gmail</button>
+    <button class="btn-secondary" onclick="resetForm()">🔄 Reset</button>
+  </div>
+
+  <div class="output-section">
+    <div class="output-box">
+      <h3>Email Subject</h3>
+      <textarea id="subject" placeholder="Generated subject will appear here..."></textarea>
+      <button class="btn-copy" onclick="copyText('subject')">Copy Subject</button>
+    </div>
+
+    <div class="output-box">
+      <h3>Email Body</h3>
+      <div id="body" class="rich-text-box" contenteditable="true">Generated email body will appear here...</div>
+      <button class="btn-copy" onclick="copyRichText('body')">Copy Body</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Developed by: QASIM.ALI.BOOKME@GMAIL.COM
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

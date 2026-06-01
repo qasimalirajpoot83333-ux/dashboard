@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Policies | Dynamic Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>Airline Policies</h1>
+            <p>Modification & Refund Charges</p>
+        </div>
+        <div class="header-right">
+            <button id="printAllBtn" class="action-btn">🖨️ Print View</button>
+            <button id="themeToggle" class="action-btn">🌙 Dark Mode</button>
+            <input type="text" id="searchInput" placeholder="Search airline (e.g., PIA)...">
+        </div>
+    </header>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" data-category="all">All</button>
+        <button class="tab-btn" data-category="domestic">Domestic</button>
+        <button class="tab-btn" data-category="international">International</button>
+        <button class="tab-btn" data-category="jeddah">Jeddah</button>
+    </div>
+
+    <main class="ticket-container" id="policyGrid">
+        </main>
+
+    <div id="noResults" class="no-results" style="display: none;">
+        <h2>✈️ No airlines found matching your search.</h2>
+    </div>
+
+    <footer>
+        <p>Website Developed by <strong>Qasim Ali</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+:root {
+    --bg-color: #e2e8f0;
+    --header-bg: #005eb8;
+    --text-color: #333;
+    --ticket-bg: #ffffff;
+    --ticket-shadow: rgba(0, 0, 0, 0.1);
+    --stub-border: #cbd5e1;
+    --code-bg: #f1f5f9;
+    --code-color: #555;
+    --label-color: #64748b;
+    --section-title: #005eb8;
+    --sidebar-bg: #f8fafc;
+    --explanation-color: #475569;
+    
+    /* Syntax Highlighting Colors */
+    --syn-action: #2563eb; /* Blue */
+    --syn-date: #059669;   /* Green */
+    --syn-airport: #dc2626; /* Red */
+}
+
+[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --header-bg: #1e293b;
+    --text-color: #f8fafc;
+    --ticket-bg: #1e293b;
+    --ticket-shadow: rgba(0, 0, 0, 0.4);
+    --stub-border: #475569;
+    --code-bg: #0f172a;
+    --code-color: #ccc;
+    --label-color: #94a3b8;
+    --section-title: #38bdf8;
+    --sidebar-bg: #1e293b;
+    --explanation-color: #cbd5e1;
+    
+    /* Dark Mode Syntax Colors */
+    --syn-action: #60a5fa; /* Light Blue */
+    --syn-date: #34d399;   /* Light Green */
+    --syn-airport: #f87171; /* Light Red */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+}
+
+header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content { max-width: 1200px; margin: 0 auto; text-align: center; }
+.header-content h1 { margin: 0 0 0.25rem 0; font-size: 1.5rem; }
+.header-content p { margin: 0 0 0.75rem 0; opacity: 0.9; font-size: 0.9rem; }
+
+.controls {
+    display: flex; gap: 10px; justify-content: center; max-width: 700px; margin: 0 auto;
+}
+
+.theme-btn, .print-btn {
+    padding: 8px 15px; font-size: 14px; background-color: #38bdf8; color: #0f172a;
+    border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+}
+
+.layout-container {
+    display: flex; max-width: 1200px; margin: 2rem auto; padding: 0 1rem; gap: 2rem; align-items: flex-start;
+}
+
+/* Sidebar */
+.sidebar {
+    position: sticky; top: 120px; width: 250px; background-color: var(--sidebar-bg);
+    padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px var(--ticket-shadow);
+    max-height: calc(100vh - 140px); overflow-y: auto;
+}
+
+.sidebar h3 { margin-top: 0; color: var(--section-title); border-bottom: 2px solid var(--stub-border); padding-bottom: 0.5rem; }
+.sidebar a { display: block; color: var(--text-color); text-decoration: none; padding: 8px 0; font-size: 0.9rem; border-bottom: 1px solid var(--stub-border); transition: color 0.2s; }
+.sidebar a.sub-link { padding: 6px 0 6px 15px; font-size: 0.8rem; border-bottom: none; color: var(--label-color); border-left: 2px solid var(--stub-border); margin-left: 5px; }
+.sidebar a:hover, .sidebar a.sub-link:hover { color: var(--section-title); font-weight: bold; }
+
+main { flex: 1; min-width: 0; }
+
+/* Accordion Category Styling */
+.category-section { margin-bottom: 3rem; scroll-margin-top: 120px; }
+
+.category-title {
+    color: var(--section-title); border-bottom: 2px solid var(--stub-border);
+    padding-bottom: 0.5rem; margin-bottom: 1.5rem; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none; transition: opacity 0.2s;
+}
+
+.category-title:hover { opacity: 0.8; }
+.category-title::after { content: '▼'; font-size: 0.8rem; transition: transform 0.3s; }
+.category-section.collapsed .category-title::after { transform: rotate(-90deg); }
+.category-section.collapsed .ticket-wrapper { display: none; }
+
+/* Interactive Builder Styling */
+.interactive-builder {
+    background: linear-gradient(135deg, var(--section-title), #38bdf8);
+    color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px;
+    box-shadow: 0 4px 8px var(--ticket-shadow); position: relative;
+}
+.interactive-builder h4 { margin: 0 0 15px 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+.builder-inputs { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+.builder-inputs input {
+    padding: 10px; border-radius: 6px; border: none; outline: none; flex: 1;
+    min-width: 100px; font-weight: bold; text-transform: uppercase;
+}
+.builder-result-box {
+    background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex;
+    justify-content: space-between; align-items: center;
+}
+.builder-result-box code { background: transparent; border: none; color: white; font-size: 1.2rem; padding: 0; margin: 0; }
+.builder-result-box .copy-btn { position: static; color: white; opacity: 1; background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 6px; }
+.builder-result-box .copy-btn:hover { background: rgba(255,255,255,0.3); }
+
+/* Ticket Styling */
+.ticket {
+    display: flex; background-color: var(--ticket-bg); border-radius: 12px; margin-bottom: 1rem;
+    box-shadow: 0 4px 8px var(--ticket-shadow); position: relative; transition: transform 0.2s;
+    scroll-margin-top: 120px;
+}
+.ticket:hover { transform: translateY(-2px); }
+
+.ticket-action { flex: 3; padding: 20px 30px; border-right: 2px dashed var(--stub-border); position: relative; }
+.ticket-action::before, .ticket-action::after { content: ''; position: absolute; right: -13px; width: 24px; height: 24px; background-color: var(--bg-color); border-radius: 50%; }
+.ticket-action::before { top: -12px; }
+.ticket-action::after { bottom: -12px; }
+
+.ticket-command { flex: 2; padding: 20px 30px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+
+.copy-btn { position: absolute; top: 10px; right: 15px; background: none; border: none; cursor: pointer; font-size: 1.2rem; opacity: 0.5; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+
+.label { display: block; font-size: 0.75rem; color: var(--label-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.value { font-size: 1.1rem; font-weight: 500; margin-bottom: 5px; }
+
+.explanation { font-size: 0.9rem; color: var(--explanation-color); margin-top: 8px; line-height: 1.5; background: rgba(0,0,0,0.03); padding: 8px; border-radius: 6px; border-left: 3px solid var(--section-title); }
+
+/* Syntax Highlighting Base Code */
+code {
+    background-color: var(--code-bg); color: var(--code-color); padding: 6px 10px;
+    border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-weight: bold;
+    display: inline-block; word-break: break-all; border: 1px solid var(--stub-border); margin-bottom: 4px;
+}
+/* Syntax Classes */
+.syn-action { color: var(--syn-action); }
+.syn-date { color: var(--syn-date); }
+.syn-airport { color: var(--syn-airport); }
+
+footer { text-align: center; padding: 2rem; color: var(--label-color); font-size: 0.9rem; border-top: 1px solid var(--stub-border); margin-top: 2rem; }
+
+@media print {
+    body { background-color: white; color: black; }
+    [data-theme="dark"] { background-color: white; color: black; }
+    header, .controls, .sidebar, .ticket-action::before, .ticket-action::after, .copy-btn, .interactive-builder { display: none !important; }
+    .layout-container { display: block; margin: 0; padding: 0; }
+    .category-section.collapsed .ticket-wrapper { display: block; } /* Uncollapse everything for print */
+    .category-title::after { display: none; }
+    .ticket { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; margin-bottom: 0.5rem; }
+    .ticket-action { border-right: 1px solid #ccc; padding: 15px; }
+    .ticket-command { padding: 15px; }
+    code { border: none; padding: 2px 4px; }
+    footer { display: block; }
+}
+
+@media (max-width: 768px) {
+    .layout-container { flex-direction: column; }
+    .sidebar { width: 100%; position: static; max-height: 200px; box-sizing: border-box; }
+    .ticket { flex-direction: column; }
+    .ticket-action { border-right: none; border-bottom: 2px dashed var(--stub-border); }
+    .ticket-action::before, .ticket-action::after { right: auto; bottom: -13px; }
+    .ticket-action::before { left: -12px; }
+    .ticket-action::after { right: -12px; left: auto; }
+}

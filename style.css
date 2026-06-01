@@ -1,0 +1,333 @@
+:root {
+    --bg-main: #111828; /* Deep aviation blue background */
+    --bg-sidebar: #192235;
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+    --ticket-bg: #ffffff;
+    --ticket-text: #0f172a;
+    
+    --c-green: #10b981;
+    --c-yellow: #f59e0b;
+    --c-blue: #3b82f6;
+    --c-gray: #94a3b8;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-light);
+    height: 100vh;
+    overflow: hidden; /* Locks the outer browser window so only the tickets scroll */
+    background-image: radial-gradient(circle at center, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    width: 240px;
+    background-color: var(--bg-sidebar);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.brand {
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center; /* Centers the logo in the sidebar */
+    align-items: center;
+}
+
+.brand-logo {
+    max-width: 160px; /* Keeps the logo cleanly within the sidebar width */
+    height: auto;
+    display: block;
+}
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    gap: 5px;
+    flex-grow: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-item i { font-size: 16px; width: 20px; text-align: center; }
+.nav-item:hover { color: var(--text-light); background: rgba(255,255,255,0.05); }
+.nav-item.active { background: rgba(59, 130, 246, 0.15); color: #fff; border-left: 3px solid var(--c-blue); }
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-profile img {
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info h4 { margin: 0; font-size: 13px; color: #fff; }
+.user-info span { font-size: 11px; color: var(--text-muted); }
+
+/* ================= MAIN CONTENT & TOP BAR ================= */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    overflow: hidden;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-shrink: 0; /* Prevents the header from squishing */
+}
+
+.search-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 300px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.search-box i { color: var(--text-muted); }
+.search-box input {
+    background: transparent; border: none; color: #fff; outline: none;
+    font-family: inherit; font-size: 13px; width: 100%;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.date-time {
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+}
+
+.icon-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-light); width: 35px; height: 35px;
+    border-radius: 8px; cursor: pointer; transition: 0.2s;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* ================= TICKET GRID (SCROLLABLE & FULL BOX) ================= */
+.ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(260px, auto); /* CRITICAL: Allows cards to dynamically fit their content */
+    gap: 30px; /* Slightly wider gap for a cleaner look */
+    overflow-y: auto; /* Allows smooth scrolling */
+    padding-right: 15px;
+    padding-bottom: 40px;
+}
+
+/* Custom Scrollbar */
+.ticket-grid::-webkit-scrollbar { width: 8px; }
+.ticket-grid::-webkit-scrollbar-track { background: transparent; }
+.ticket-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
+.ticket-grid::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
+/* ================= THE TICKET DESIGN ================= */
+.ticket {
+    background: var(--ticket-bg);
+    border-radius: 12px;
+    color: var(--ticket-text);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    overflow: hidden; /* Keeps the hover-stub inside the box */
+}
+
+.ticket:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* The Perforated Cutouts (Perfectly centered on the Left & Right sides) */
+.ticket::before, .ticket::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 32px;
+    background: var(--bg-main); /* Matches the app background to look like a hole */
+    z-index: 5;
+}
+.ticket::before { left: 0; border-radius: 0 32px 32px 0; }
+.ticket::after { right: 0; border-radius: 32px 0 0 32px; }
+
+.ticket-header {
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #e2e8f0;
+}
+
+.ticket-type { font-size: 11px; font-weight: 700; color: #475569; letter-spacing: 0.5px; }
+
+.status-badge {
+    font-size: 10px; font-weight: 800; padding: 5px 12px; border-radius: 4px; color: #fff; letter-spacing: 1px;
+}
+.status-active { background: var(--c-green); }
+.status-warning { background: var(--c-yellow); color: #78350f; }
+.status-blue { background: var(--c-blue); }
+.status-gray { background: var(--c-gray); }
+
+.ticket-body { 
+    padding: 20px 25px; 
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flight-route { display: flex; align-items: center; margin-bottom: 20px; }
+.flight-route .code { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+.flight-route .divider { margin: 0 15px; color: #cbd5e1; font-weight: 300; }
+.flight-route .destination { margin: 0; font-size: 16px; font-weight: 600; color: #334155; }
+.flight-route i { font-size: 14px; margin: 0 5px; color: var(--text-muted); }
+
+.passenger-data, .time-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 15px;
+}
+
+.data-group { display: flex; flex-direction: column; }
+.data-group span { font-size: 10px; color: #64748b; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 3px; text-transform: uppercase; }
+.data-group strong { font-size: 14px; font-weight: 700; color: #0f172a; }
+
+.badge-small {
+    font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: inline-block; width: fit-content; color: #fff;
+}
+.bg-green { background: var(--c-green); }
+.bg-yellow { background: var(--c-yellow); color: #78350f;}
+.bg-blue { background: var(--c-blue); }
+.bg-gray { background: var(--c-gray); }
+
+.ticket-footer {
+    padding: 15px 25px;
+    border-top: 2px dashed #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Faux Barcode Effect */
+.barcode {
+    height: 30px;
+    width: 50%;
+    background: repeating-linear-gradient(to right, 
+        #0f172a, #0f172a 2px, transparent 2px, transparent 4px, 
+        #0f172a 4px, #0f172a 5px, transparent 5px, transparent 8px,
+        #0f172a 8px, #0f172a 12px, transparent 12px, transparent 14px);
+    opacity: 0.8;
+}
+
+.ticket-no { text-align: right; display: flex; flex-direction: column; }
+.ticket-no span { font-size: 9px; color: #64748b; font-weight: 600; letter-spacing: 0.5px; }
+.ticket-no strong { font-size: 13px; font-weight: 800; font-family: monospace; letter-spacing: 1px; }
+
+
+/* ================= TICKET STUB HOVER EFFECT ================= */
+
+.ticket-stub {
+    position: absolute;
+    top: 0;
+    right: -60px; /* Hides the stub completely off the right edge */
+    bottom: 0;
+    width: 50px;
+    background: var(--c-blue);
+    border-left: 2px dashed rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+}
+
+.stub-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.stub-text i {
+    font-size: 12px;
+    transform: rotate(90deg);
+}
+
+/* The Hover Trigger */
+.ticket:hover .ticket-stub {
+    right: 0; 
+}
+
+/* Slight dimming of the main ticket content when hovered */
+.ticket:hover .ticket-body,
+.ticket:hover .ticket-header,
+.ticket:hover .ticket-footer {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.ticket-body, .ticket-header, .ticket-footer {
+    transition: opacity 0.3s ease;
+}
+
+/* Responsive Grid for smaller laptops */
+@media (max-width: 1100px) {
+    .ticket-grid { grid-template-columns: 1fr; }
+}

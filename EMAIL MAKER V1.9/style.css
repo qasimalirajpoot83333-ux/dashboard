@@ -1,0 +1,267 @@
+/* --- THEME VARIABLES --- */
+:root[data-theme="dark"] {
+  --bg-main: linear-gradient(135deg, #020617, #0f172a);
+  --card-bg: #1e293b;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --input-bg: #334155;
+  --input-border: #475569;
+  --box-bg: #0f172a;
+  --shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+:root[data-theme="light"] {
+  --bg-main: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --input-bg: #f8fafc;
+  --input-border: #cbd5e1;
+  --box-bg: #f1f5f9;
+  --shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* --- GLOBAL --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+/* --- CONTAINER (Ticket Style) --- */
+.container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  overflow: hidden; /* Keeps the header inside the rounded corners */
+}
+
+/* --- HEADER & TOGGLE (Ticket Header) --- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, #7dd3fc 0%, #0ea5e9 100%);
+  padding: 30px 40px;
+}
+
+.header-logo {
+  max-width: 160px;
+  height: auto;
+  display: block;
+}
+
+/* The cutout dashed line making the UI look like a physical ticket */
+.ticket-divider {
+  border-top: 2px dashed #cbd5e1;
+  margin: 0 20px;
+  position: relative;
+}
+.ticket-divider::before, .ticket-divider::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  width: 30px;
+  height: 30px;
+  background: var(--bg-main);
+  border-radius: 50%;
+}
+.ticket-divider::before { left: -35px; }
+.ticket-divider::after { right: -35px; }
+
+h2 { font-weight: 600; letter-spacing: 0.5px; }
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* --- FORM GRID --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 30px 40px 10px 40px;
+}
+
+.full-width { grid-column: span 2; }
+
+.dynamic-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* --- INPUTS & PASTE BUTTON --- */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.btn-paste {
+  background: var(--box-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-main);
+  border-radius: 8px;
+  padding: 0 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+.btn-paste:hover {
+  background: var(--input-bg);
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+/* --- BUTTONS --- */
+.button-group {
+  margin-top: 30px;
+  padding: 0 40px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 14px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+button:active { transform: scale(0.98); }
+
+.btn-primary { background: #3b82f6; color: white; }
+.btn-primary:hover { background: #2563eb; }
+
+.btn-success { background: #22c55e; color: white; }
+.btn-success:hover { background: #16a34a; }
+
+.btn-secondary { background: #64748b; color: white; }
+.btn-secondary:hover { background: #475569; }
+
+/* --- OUTPUT SECTION --- */
+.output-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 40px;
+  padding: 0 40px 40px 40px;
+}
+
+.output-box {
+  background: var(--box-bg);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+}
+
+.output-box h3 { margin-bottom: 15px; font-size: 16px; }
+
+textarea {
+  height: 250px;
+  resize: vertical;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.btn-copy { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--input-border); width: 100%; }
+.btn-copy:hover { filter: brightness(1.2); }
+
+/* --- CHECKBOX OPTIONS --- */
+.options-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  padding: 0 40px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+  background: var(--box-bg);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+}
+
+.checkbox-label input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+
+/* --- RICH TEXT BOX --- */
+.rich-text-box {
+  height: 250px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.rich-text-box:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+
+/* --- FOOTER --- */
+footer { text-align: center; margin-top: 30px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .form-grid, .dynamic-fields, .output-section { grid-template-columns: 1fr; }
+  .full-width { grid-column: span 1; }
+  .header, .form-grid, .button-group, .output-section, .options-group { padding-left: 25px; padding-right: 25px; }
+  .button-group { flex-direction: column; }
+}
