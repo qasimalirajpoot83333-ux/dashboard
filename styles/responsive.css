@@ -1,0 +1,399 @@
+/* ============================================
+   RESPONSIVE - Aviation Dashboard
+   Mobile-First Approach
+   ============================================ */
+
+/* Small Mobile (320px - 479px) */
+@media (max-width: 479px) {
+    :root {
+        --sidebar-width: 0;
+        --topbar-height: 60px;
+        --font-size-base: 14px;
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 999;
+        transition: left 0.3s ease;
+        border-radius: 0;
+        padding-bottom: 80px;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        width: 100%;
+        height: 100%;
+    }
+
+    .top-bar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .search-box {
+        max-width: none;
+        flex: 1;
+        order: 3;
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .top-actions {
+        order: 2;
+        gap: 8px;
+    }
+
+    .date-time {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+
+    .ticket-grid {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .nav-item {
+        padding: 12px 16px;
+        font-size: 12px;
+    }
+
+    .nav-item i {
+        font-size: 18px;
+    }
+
+    .passenger-data, .time-data {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .flight-route {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .destination {
+        font-size: 14px;
+    }
+
+    .ticket-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ticket-stub {
+        border-radius: 8px;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .ticket-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .status-badge {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Tablet (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+    :root {
+        --sidebar-width: 0;
+        --topbar-height: 64px;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 999;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .top-bar {
+        padding: 0 16px;
+    }
+
+    .ticket-grid {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .ticket {
+        margin: 0;
+    }
+
+    .search-box {
+        max-width: none;
+    }
+
+    .passenger-data, .time-data {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    :root {
+        --sidebar-width: 240px;
+        --topbar-height: 64px;
+    }
+
+    .ticket-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .search-box {
+        max-width: 300px;
+    }
+
+    .nav-item {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .nav-menu {
+        gap: 8px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+
+    .ticket-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+    :root {
+        --sidebar-width: 300px;
+    }
+
+    .ticket-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ticket {
+        max-width: 400px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+}
+
+/* Landscape Orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+    .top-bar {
+        height: 50px;
+    }
+
+    .ticket-grid {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .ticket-body {
+        padding: 12px;
+    }
+
+    .passenger-data, .time-data {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .top-bar,
+    .menu-toggle,
+    .icon-btn,
+    .search-box,
+    .ticket-stub {
+        display: none !important;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .ticket-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ticket {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+
+    body {
+        background: white;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark Mode Preference */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1e293b;
+        --bg-secondary: #0f172a;
+        --text-primary: #f1f5f9;
+        --text-muted: #cbd5e1;
+        --gray-100: #334155;
+        --gray-200: #475569;
+        --gray-300: #64748b;
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .barcode {
+        background-size: 2px 100%;
+    }
+}
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .ticket {
+        border-color: var(--accent);
+    }
+
+    .ticket-stub {
+        opacity: 0;
+    }
+
+    .nav-item:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    button, a, [role="button"] {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .icon-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Super Small Screens */
+@media (max-width: 319px) {
+    :root {
+        --font-size-base: 12px;
+        --spacing-md: 8px;
+        --spacing-lg: 12px;
+    }
+
+    .ticket-header {
+        padding: 8px 12px;
+    }
+
+    .ticket-body {
+        padding: 8px 12px;
+    }
+
+    .passenger-data, .time-data {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .flight-route {
+        gap: 8px;
+    }
+
+    .destination {
+        font-size: 12px;
+    }
+
+    .code {
+        font-size: 9px;
+        padding: 4px 6px;
+    }
+}
+
+/* Accessibility - Focus Visible */
+@media (prefers-focus-visible) {
+    *:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+
+    button:focus,
+    a:focus,
+    input:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
+}
+
+/* Slow Network */
+@media (prefers-reduced-data: reduce) {
+    * {
+        background-image: none !important;
+        animation: none !important;
+    }
+
+    .barcode {
+        display: none;
+    }
+}
