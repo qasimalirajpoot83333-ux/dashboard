@@ -3,40 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e293b">
+    <meta name="description" content="Aviation Dashboard - Ticket Management & Module Control">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="color-scheme" content="light dark">
+    
     <title>Master Email Maker | Aviation Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div class="app-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" role="navigation" aria-label="Main navigation">
            <div class="brand">
-                <img src="https://cdn.aptoide.com/imgs/c/3/e/c3e660c18cd19aa49d4a07a9c45183f6_icon.png" alt="Bookme Logo" class="brand-logo">
+                <img src="assets/logo.png" alt="Aviation Dashboard Logo" class="brand-logo" loading="lazy" width="48" height="48">
             </div>
 
             <nav class="nav-menu">
-                <a href="#" class="nav-item active">
-                    <i class="fa-solid fa-border-all"></i> DASHBOARD
+                <a href="#main-content" class="nav-item active" data-page="dashboard" aria-current="page">
+                    <i class="fa-solid fa-border-all" aria-hidden="true"></i>
+                    <span>DASHBOARD</span>
                 </a>
-                <a href="Domestic Airline Refund & Modification Policies/index.html" class="nav-item">
-                    <i class="fa-solid fa-book-bookmark"></i> POLICIES
+                <a href="Domestic Airline Refund & Modification Policies/index.html" class="nav-item" data-page="policies" aria-label="Airline Policies">
+                    <i class="fa-solid fa-book-bookmark" aria-hidden="true"></i>
+                    <span>POLICIES</span>
                 </a>
-                <a href="#" class="nav-item" id="btn-toolkit">
-                    <i class="fa-solid fa-toolbox"></i> TOOL KIT
-                </a>
-                <a href="#" class="nav-item" id="btn-settings">
-                    <i class="fa-solid fa-gear"></i> SETTINGS
-                </a>
+                <button class="nav-item" id="btn-toolkit" aria-label="Toolkit menu" aria-expanded="false">
+                    <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
+                    <span>TOOL KIT</span>
+                </button>
+                <button class="nav-item" id="btn-settings" aria-label="Settings menu" aria-expanded="false">
+                    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+                    <span>SETTINGS</span>
+                </button>
             </nav>
 
             <div class="sidebar-footer">
-                <a href="#" class="nav-item" id="btn-exit" style="color: #94a3b8; font-size: 12px; margin-bottom: 10px;">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i> EXIT PORTAL
-                </a>
+                <button class="nav-item exit-btn" id="btn-exit" aria-label="Exit portal">
+                    <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+                    <span>EXIT PORTAL</span>
+                </button>
                 <div class="user-profile">
-				<img src="https://raw.githubusercontent.com/qasimalirajpoot83333-ux/dashboard/main/DEVELOPER.png" alt="Qasim Ali" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'">
+                    <img src="assets/developer-avatar.png" 
+                         alt="Qasim Ali - Developer" 
+                         class="user-avatar" 
+                         loading="lazy" 
+                         width="48" 
+                         height="48">
                     <div class="user-info">
                         <h4>Qasim Ali</h4>
                         <span>Developer</span>
@@ -46,338 +68,417 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="main-content">
+        <main class="main-content" id="main-content" role="main">
             <!-- Top Bar -->
-            <header class="top-bar">
+            <header class="top-bar" role="banner">
                 <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="module-search" placeholder="Search modules...">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input type="text" 
+                           id="module-search" 
+                           placeholder="Search modules..." 
+                           aria-label="Search modules"
+                           aria-describedby="search-help">
+                    <span id="search-help" class="sr-only">Type to filter modules by name or category</span>
                 </div>
                 
                 <div class="top-actions">
-                    <div class="date-time">
-                        <i class="fa-regular fa-calendar"></i>
-                        <span id="live-datetime">LOADING GMT...</span>
+                    <div class="date-time" role="status" aria-live="polite">
+                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                        <span id="live-datetime">Loading...</span>
                     </div>
-                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
-                    <button class="icon-btn"><i class="fa-regular fa-circle-question"></i></button>
+                    <button class="icon-btn" aria-label="Notifications" title="Notifications">
+                        <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                        <span class="notification-badge" aria-label="2 new notifications">2</span>
+                    </button>
+                    <button class="icon-btn" aria-label="Help" title="Help & Support">
+                        <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                    </button>
                 </div>
             </header>
 
             <!-- Ticket Grid -->
-            <div class="ticket-grid" id="module-grid">
+            <div class="ticket-grid" id="module-grid" role="list">
                 
                 <!-- Ticket 1: Email Maker -->
-                <a href="EMAIL MAKER V1.9/index.html" class="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-type">ACTIVE MODULE</span>
-                        <span class="status-badge status-active">ONLINE</span>
-                    </div>
-                    <div class="ticket-body">
-                        <div class="flight-route">
-                            <span class="code">EMK 1.9</span>
-                            <span class="divider">|</span>
-                            <h3 class="destination">Ticket Email Maker <i class="fa-solid fa-plane"></i> Generator</h3>
+                <article class="ticket" role="listitem" data-module="email-maker">
+                    <a href="EMAIL MAKER V1.9/index.html" class="ticket-link">
+                        <div class="ticket-header">
+                            <span class="ticket-type">ACTIVE MODULE</span>
+                            <span class="status-badge status-active" aria-label="Online">ONLINE</span>
                         </div>
-                        <div class="passenger-data">
-                            <div class="data-group">
-                                <span>CATEGORY</span>
-                                <strong>CORE TOOL</strong>
+                        <div class="ticket-body">
+                            <div class="flight-route">
+                                <span class="code">EMK 1.9</span>
+                                <span class="divider" aria-hidden="true">|</span>
+                                <h3 class="destination">
+                                    Ticket Email Maker 
+                                    <i class="fa-solid fa-plane" aria-hidden="true"></i> 
+                                    Generator
+                                </h3>
                             </div>
-                            <div class="data-group">
-                                <span>VERSION</span>
-                                <strong>V1.9</strong>
+                            <div class="passenger-data">
+                                <div class="data-group">
+                                    <span class="label">CATEGORY</span>
+                                    <strong>CORE TOOL</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">VERSION</span>
+                                    <strong>V1.9</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">ACCESS</span>
+                                    <strong>GLOBAL</strong>
+                                </div>
                             </div>
-                            <div class="data-group">
-                                <span>ACCESS</span>
-                                <strong>GLOBAL</strong>
+                            <div class="time-data">
+                                <div class="data-group">
+                                    <span class="label">DEPLOYED</span>
+                                    <strong>25 OCT</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">GATE</span>
+                                    <strong>M-01</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">STATUS</span>
+                                    <span class="badge-small bg-green">OPERATIONAL</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="time-data">
-                            <div class="data-group">
-                                <span>DEPLOYED</span>
-                                <strong>25 OCT</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>GATE</span>
-                                <strong>M-01</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>STATUS</span>
-                                <span class="badge-small bg-green">OPERATIONAL</span>
+                        <div class="ticket-footer">
+                            <div class="barcode"></div>
+                            <div class="ticket-no">
+                                <span>AUTHORIZATION NO.</span>
+                                <strong>17624135900</strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="ticket-footer">
-                        <div class="barcode"></div>
-                        <div class="ticket-no">
-                            <span>AUTHORIZATION NO.</span>
-                            <strong>17624135900</strong>
+                        <div class="ticket-stub">
+                            <div class="stub-text">
+                                <span>LAUNCH MODULE</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </article>
 
                 <!-- Ticket 2: Name Change -->
-                <a href="Airline Request Pro V1.3/index.html" class="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-type">ACTIVE MODULE</span>
-                        <span class="status-badge status-warning">PRO V1.3</span>
-                    </div>
-                    <div class="ticket-body">
-                        <div class="flight-route">
-                            <span class="code">REQ 1.3</span>
-                            <span class="divider">|</span>
-                            <h3 class="destination">Name/Title Change <i class="fa-solid fa-plane"></i> Request</h3>
+                <article class="ticket" role="listitem" data-module="name-change">
+                    <a href="Airline Request Pro V1.3/index.html" class="ticket-link">
+                        <div class="ticket-header">
+                            <span class="ticket-type">ACTIVE MODULE</span>
+                            <span class="status-badge status-warning" aria-label="Pro V1.3">PRO V1.3</span>
                         </div>
-                        <div class="passenger-data">
-                            <div class="data-group">
-                                <span>CATEGORY</span>
-                                <strong>MODIFICATION</strong>
+                        <div class="ticket-body">
+                            <div class="flight-route">
+                                <span class="code">REQ 1.3</span>
+                                <span class="divider" aria-hidden="true">|</span>
+                                <h3 class="destination">
+                                    Name/Title Change 
+                                    <i class="fa-solid fa-plane" aria-hidden="true"></i> 
+                                    Request
+                                </h3>
                             </div>
-                            <div class="data-group">
-                                <span>VERSION</span>
-                                <strong>V1.3</strong>
+                            <div class="passenger-data">
+                                <div class="data-group">
+                                    <span class="label">CATEGORY</span>
+                                    <strong>MODIFICATION</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">VERSION</span>
+                                    <strong>V1.3</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">ACCESS</span>
+                                    <strong>SECURE</strong>
+                                </div>
                             </div>
-                            <div class="data-group">
-                                <span>ACCESS</span>
-                                <strong>SECURE</strong>
+                            <div class="time-data">
+                                <div class="data-group">
+                                    <span class="label">DEPLOYED</span>
+                                    <strong>25 OCT</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">GATE</span>
+                                    <strong>M-02</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">STATUS</span>
+                                    <span class="badge-small bg-yellow">UPGRADED</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="time-data">
-                            <div class="data-group">
-                                <span>DEPLOYED</span>
-                                <strong>25 OCT</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>GATE</span>
-                                <strong>M-02</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>STATUS</span>
-                                <span class="badge-small bg-yellow">UPGRADED</span>
+                        <div class="ticket-footer">
+                            <div class="barcode"></div>
+                            <div class="ticket-no">
+                                <span>AUTHORIZATION NO.</span>
+                                <strong>18831940122</strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="ticket-footer">
-                        <div class="barcode"></div>
-                        <div class="ticket-no">
-                            <span>AUTHORIZATION NO.</span>
-                            <strong>18831940122</strong>
+                        <div class="ticket-stub">
+                            <div class="stub-text">
+                                <span>LAUNCH MODULE</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </article>
 
                 <!-- Ticket 3: AirSial Fixer -->
-                <a href="AirSial Segment Fixer/index.html" class="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-type">AUTOMATION</span>
-                        <span class="status-badge status-blue">API SYNC</span>
-                    </div>
-                    <div class="ticket-body">
-                        <div class="flight-route">
-                            <span class="code">PF 099</span>
-                            <span class="divider">|</span>
-                            <h3 class="destination">AirSial Segment <i class="fa-solid fa-plane"></i> Fixer</h3>
+                <article class="ticket" role="listitem" data-module="airsial-fixer">
+                    <a href="AirSial Segment Fixer/index.html" class="ticket-link">
+                        <div class="ticket-header">
+                            <span class="ticket-type">AUTOMATION</span>
+                            <span class="status-badge status-blue" aria-label="API Sync">API SYNC</span>
                         </div>
-                        <div class="passenger-data">
-                            <div class="data-group">
-                                <span>CATEGORY</span>
-                                <strong>UTILITY</strong>
+                        <div class="ticket-body">
+                            <div class="flight-route">
+                                <span class="code">PF 099</span>
+                                <span class="divider" aria-hidden="true">|</span>
+                                <h3 class="destination">
+                                    AirSial Segment 
+                                    <i class="fa-solid fa-plane" aria-hidden="true"></i> 
+                                    Fixer
+                                </h3>
                             </div>
-                            <div class="data-group">
-                                <span>TYPE</span>
-                                <strong>AUTOMATED</strong>
+                            <div class="passenger-data">
+                                <div class="data-group">
+                                    <span class="label">CATEGORY</span>
+                                    <strong>UTILITY</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">TYPE</span>
+                                    <strong>AUTOMATED</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">PORTAL</span>
+                                    <strong>AIRSIAL</strong>
+                                </div>
                             </div>
-                            <div class="data-group">
-                                <span>PORTAL</span>
-                                <strong>AIRSIAL</strong>
+                            <div class="time-data">
+                                <div class="data-group">
+                                    <span class="label">DEPLOYED</span>
+                                    <strong>26 OCT</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">GATE</span>
+                                    <strong>M-03</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">STATUS</span>
+                                    <span class="badge-small bg-blue">SYNC OPEN</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="time-data">
-                            <div class="data-group">
-                                <span>DEPLOYED</span>
-                                <strong>26 OCT</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>GATE</span>
-                                <strong>M-03</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>STATUS</span>
-                                <span class="badge-small bg-blue">SYNC OPEN</span>
+                        <div class="ticket-footer">
+                            <div class="barcode"></div>
+                            <div class="ticket-no">
+                                <span>AUTHORIZATION NO.</span>
+                                <strong>15521565109</strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="ticket-footer">
-                        <div class="barcode"></div>
-                        <div class="ticket-no">
-                            <span>AUTHORIZATION NO.</span>
-                            <strong>15521565109</strong>
+                        <div class="ticket-stub">
+                            <div class="stub-text">
+                                <span>LAUNCH MODULE</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </article>
 
                 <!-- Ticket 4: Meezab Issuance -->
-                <a href="Meezab Ticket Request/index.html" class="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-type">NETWORK REQUEST</span>
-                        <span class="status-badge status-gray">STANDBY</span>
-                    </div>
-                    <div class="ticket-body">
-                        <div class="flight-route">
-                            <span class="code">MZB 108</span>
-                            <span class="divider">|</span>
-                            <h3 class="destination">Meezab Ticket <i class="fa-solid fa-plane"></i> Issuance</h3>
+                <article class="ticket" role="listitem" data-module="meezab">
+                    <a href="Meezab Ticket Request/index.html" class="ticket-link">
+                        <div class="ticket-header">
+                            <span class="ticket-type">NETWORK REQUEST</span>
+                            <span class="status-badge status-gray" aria-label="Standby">STANDBY</span>
                         </div>
-                        <div class="passenger-data">
-                            <div class="data-group">
-                                <span>CATEGORY</span>
-                                <strong>ISSUANCE</strong>
+                        <div class="ticket-body">
+                            <div class="flight-route">
+                                <span class="code">MZB 108</span>
+                                <span class="divider" aria-hidden="true">|</span>
+                                <h3 class="destination">
+                                    Meezab Ticket 
+                                    <i class="fa-solid fa-plane" aria-hidden="true"></i> 
+                                    Issuance
+                                </h3>
                             </div>
-                            <div class="data-group">
-                                <span>NETWORK</span>
-                                <strong>MEEZAB</strong>
+                            <div class="passenger-data">
+                                <div class="data-group">
+                                    <span class="label">CATEGORY</span>
+                                    <strong>ISSUANCE</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">NETWORK</span>
+                                    <strong>MEEZAB</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">ACCESS</span>
+                                    <strong>AGENT</strong>
+                                </div>
                             </div>
-                            <div class="data-group">
-                                <span>ACCESS</span>
-                                <strong>AGENT</strong>
+                            <div class="time-data">
+                                <div class="data-group">
+                                    <span class="label">DEPLOYED</span>
+                                    <strong>24 OCT</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">GATE</span>
+                                    <strong>M-04</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">STATUS</span>
+                                    <span class="badge-small bg-gray">READY</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="time-data">
-                            <div class="data-group">
-                                <span>DEPLOYED</span>
-                                <strong>24 OCT</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>GATE</span>
-                                <strong>M-04</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>STATUS</span>
-                                <span class="badge-small bg-gray">READY</span>
+                        <div class="ticket-footer">
+                            <div class="barcode"></div>
+                            <div class="ticket-no">
+                                <span>AUTHORIZATION NO.</span>
+                                <strong>12210818111</strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="ticket-footer">
-                        <div class="barcode"></div>
-                        <div class="ticket-no">
-                            <span>AUTHORIZATION NO.</span>
-                            <strong>12210818111</strong>
+                        <div class="ticket-stub">
+                            <div class="stub-text">
+                                <span>LAUNCH MODULE</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </article>
 
                 <!-- Ticket 5: Fly Jinnah Refund -->
-                <a href="Fly Jinnah Refund/index.html" class="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-type">FINANCIAL</span>
-                        <span class="status-badge status-active">ONLINE</span>
-                    </div>
-                    <div class="ticket-body">
-                        <div class="flight-route">
-                            <span class="code">FJR 415</span>
-                            <span class="divider">|</span>
-                            <h3 class="destination">Fly Jinnah <i class="fa-solid fa-plane"></i> Refund Matrix</h3>
+                <article class="ticket" role="listitem" data-module="fly-jinnah">
+                    <a href="Fly Jinnah Refund/index.html" class="ticket-link">
+                        <div class="ticket-header">
+                            <span class="ticket-type">FINANCIAL</span>
+                            <span class="status-badge status-active" aria-label="Online">ONLINE</span>
                         </div>
-                        <div class="passenger-data">
-                            <div class="data-group">
-                                <span>CATEGORY</span>
-                                <strong>REFUND</strong>
+                        <div class="ticket-body">
+                            <div class="flight-route">
+                                <span class="code">FJR 415</span>
+                                <span class="divider" aria-hidden="true">|</span>
+                                <h3 class="destination">
+                                    Fly Jinnah 
+                                    <i class="fa-solid fa-plane" aria-hidden="true"></i> 
+                                    Refund Matrix
+                                </h3>
                             </div>
-                            <div class="data-group">
-                                <span>CALCULATOR</span>
-                                <strong>ACTIVE</strong>
+                            <div class="passenger-data">
+                                <div class="data-group">
+                                    <span class="label">CATEGORY</span>
+                                    <strong>REFUND</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">CALCULATOR</span>
+                                    <strong>ACTIVE</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">ACCESS</span>
+                                    <strong>FINANCE</strong>
+                                </div>
                             </div>
-                            <div class="data-group">
-                                <span>ACCESS</span>
-                                <strong>FINANCE</strong>
+                            <div class="time-data">
+                                <div class="data-group">
+                                    <span class="label">DEPLOYED</span>
+                                    <strong>28 OCT</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">GATE</span>
+                                    <strong>M-05</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">STATUS</span>
+                                    <span class="badge-small bg-green">OPERATIONAL</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="time-data">
-                            <div class="data-group">
-                                <span>DEPLOYED</span>
-                                <strong>28 OCT</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>GATE</span>
-                                <strong>M-05</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>STATUS</span>
-                                <span class="badge-small bg-green">OPERATIONAL</span>
+                        <div class="ticket-footer">
+                            <div class="barcode"></div>
+                            <div class="ticket-no">
+                                <span>AUTHORIZATION NO.</span>
+                                <strong>19940182833</strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="ticket-footer">
-                        <div class="barcode"></div>
-                        <div class="ticket-no">
-                            <span>AUTHORIZATION NO.</span>
-                            <strong>19940182833</strong>
+                        <div class="ticket-stub">
+                            <div class="stub-text">
+                                <span>LAUNCH MODULE</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </article>
 
                 <!-- Ticket 6: Amadeus -->
-                <a href="Amadeus Command Notes/index.html" class="ticket">
-                    <div class="ticket-header">
-                        <span class="ticket-type">GDS TERMINAL</span>
-                        <span class="status-badge status-blue">CONNECTED</span>
-                    </div>
-                    <div class="ticket-body">
-                        <div class="flight-route">
-                            <span class="code">1A CMD</span>
-                            <span class="divider">|</span>
-                            <h3 class="destination">Amadeus Command <i class="fa-solid fa-plane"></i> Notes</h3>
+                <article class="ticket" role="listitem" data-module="amadeus">
+                    <a href="Amadeus Command Notes/index.html" class="ticket-link">
+                        <div class="ticket-header">
+                            <span class="ticket-type">GDS TERMINAL</span>
+                            <span class="status-badge status-blue" aria-label="Connected">CONNECTED</span>
                         </div>
-                        <div class="passenger-data">
-                            <div class="data-group">
-                                <span>CATEGORY</span>
-                                <strong>CORE GDS</strong>
+                        <div class="ticket-body">
+                            <div class="flight-route">
+                                <span class="code">1A CMD</span>
+                                <span class="divider" aria-hidden="true">|</span>
+                                <h3 class="destination">
+                                    Amadeus Command 
+                                    <i class="fa-solid fa-plane" aria-hidden="true"></i> 
+                                    Notes
+                                </h3>
                             </div>
-                            <div class="data-group">
-                                <span>INTERFACE</span>
-                                <strong>TERMINAL</strong>
+                            <div class="passenger-data">
+                                <div class="data-group">
+                                    <span class="label">CATEGORY</span>
+                                    <strong>CORE GDS</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">INTERFACE</span>
+                                    <strong>TERMINAL</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">PROTOCOL</span>
+                                    <strong>SECURE</strong>
+                                </div>
                             </div>
-                            <div class="data-group">
-                                <span>PROTOCOL</span>
-                                <strong>SECURE</strong>
+                            <div class="time-data">
+                                <div class="data-group">
+                                    <span class="label">DEPLOYED</span>
+                                    <strong>LIVE</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">GATE</span>
+                                    <strong>GDS-1</strong>
+                                </div>
+                                <div class="data-group">
+                                    <span class="label">STATUS</span>
+                                    <span class="badge-small bg-blue">LINK ESTABLISHED</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="time-data">
-                            <div class="data-group">
-                                <span>DEPLOYED</span>
-                                <strong>LIVE</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>GATE</span>
-                                <strong>GDS-1</strong>
-                            </div>
-                            <div class="data-group">
-                                <span>STATUS</span>
-                                <span class="badge-small bg-blue">LINK ESTABLISHED</span>
+                        <div class="ticket-footer">
+                            <div class="barcode"></div>
+                            <div class="ticket-no">
+                                <span>AUTHORIZATION NO.</span>
+                                <strong>10009283741</strong>
                             </div>
                         </div>
-                    </div>
-                    <div class="ticket-footer">
-                        <div class="barcode"></div>
-                        <div class="ticket-no">
-                            <span>AUTHORIZATION NO.</span>
-                            <strong>10009283741</strong>
+                        <div class="ticket-stub">
+                            <div class="stub-text">
+                                <span>LAUNCH MODULE</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </div>
                         </div>
-                    </div>
-			<!-- The Hidden Hover Stub -->
-                    <div class="ticket-stub">
-                        <div class="stub-text">
-                            <span>LAUNCH MODULE</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </article>
 
             </div>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scripts/utils/logger.js"></script>
+    <script src="scripts/modules/datetime.js"></script>
+    <script src="scripts/modules/search.js"></script>
+    <script src="scripts/modules/navigation.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
